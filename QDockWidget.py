@@ -3,7 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 
-class main(QMainWindow):#use for make a main window -same thing qwidget but some extra properties
+class main(QMainWindow):
     def __init__(self):
         super().__init__()
         
