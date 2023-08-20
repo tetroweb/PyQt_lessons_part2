@@ -26,8 +26,9 @@ css = """
         background-color : transparent;
         }
     QToolButton::hover{
-        background-color : rgb(100,100,100);
+        background-color : whitesmoke;
     }
+    
 """
 
 
@@ -58,12 +59,18 @@ class main(QMainWindow):
         
         self.hbox = QHBoxLayout(self.menubar)
         self.hbox.setContentsMargins(self.menubar.sizeHint().width(),0,0,0)
-        self.hbox.setAlignment(Qt.AlignCenter)
+        
         
         self.title = QLabel("Title of this window")
         self.title.setStyleSheet("color : rgb(191,191,191)")
         
-        self.hbox.addWidget(self.title)
+        self.hbox2 = QHBoxLayout()
+        self.hbox.addLayout(self.hbox2)
+        
+        self.hbox3 = QHBoxLayout()
+        self.hbox.addLayout(self.hbox3)
+        
+        self.hbox2.addWidget(self.title)
         
         self.tbutton1 = QToolButton()
         self.tbutton2 = QToolButton()
@@ -77,11 +84,66 @@ class main(QMainWindow):
         self.tbutton2.setIcon(QIcon("maximize.png"))
         self.tbutton3.setIcon(QIcon("close.png"))
         
-        self.hbox.addWidget(self.tbutton1)
-        self.hbox.addWidget(self.tbutton2)
-        self.hbox.addWidget(self.tbutton3)
-
+        self.tbutton1.setFixedHeight(self.menubar.sizeHint().height())
+        self.tbutton2.setFixedHeight(self.menubar.sizeHint().height())
+        self.tbutton3.setFixedHeight(self.menubar.sizeHint().height())
         
+        
+        self.hbox3.addWidget(self.tbutton1)
+        self.hbox3.addWidget(self.tbutton2)
+        self.hbox3.addWidget(self.tbutton3)
+
+        self.hbox3.setAlignment(Qt.AlignRight)
+        self.hbox2.setContentsMargins(self.menubar.sizeHint().width(),0,0,0)
+        self.hbox2.setAlignment(Qt.AlignCenter)
+        
+        self.toolbar = QToolBar()
+        self.addToolBar(Qt.LeftToolBarArea , self.toolbar)
+        self.toolbar.setMinimumWidth(60)
+        self.toolbar.setMovable(False)
+        self.toolbar.setStyleSheet("background-color : rgb(51,51,51) ; border : none;")
+        
+        self.tbutton4 = QToolButton()
+        self.tbutton4.setIcon(QIcon("search_logo.png"))
+        self.tbutton4.setIconSize(QSize(30,30))
+        self.tbutton4.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        self.toolbar.addWidget(self.tbutton4)
+        
+        self.tbutton5 = QToolButton()
+        self.tbutton5.setIcon(QIcon("search_logo.png"))
+        self.tbutton5.setIconSize(QSize(30,30))
+        self.tbutton5.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        self.toolbar.addWidget(self.tbutton5)
+        
+        self.tbutton6 = QToolButton()
+        self.tbutton6.setIcon(QIcon("search_logo.png"))
+        self.tbutton6.setIconSize(QSize(30,30))
+        self.tbutton6.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        
+        
+        self.toolbar.setStyleSheet("""QToolBar{background-color : rgb(51,51,51) ;border: none ;}QToolButton{ padding: 5px;}""")
+        
+        self.widget = QWidget()
+        self.widget.setSizePolicy(QSizePolicy.Expanding , QSizePolicy.Expanding)
+        
+        self.toolbar.addWidget(self.widget)
+        self.toolbar.addWidget(self.tbutton6)
+        
+        self.toolbar2 = QToolBar()
+        self.addToolBar(Qt.BottomToolBarArea , self.toolbar2)
+        self.toolbar2.setMovable(False)
+        self.toolbar2.setFixedHeight(20)
+        self.toolbar2.setStyleSheet("QToolBar{background-color : rgb(0,122,204); border : none;}QToolButton{color: white; margin:0px;}QToolButton::hover{background-color : rgb(0,155,220)}")
+        
+        self.toolbar2.addAction("  Python  ")
+        self.toolbar2.addAction("  Error 0  ")
+        
+        self.widget = QWidget()
+        self.widget.setSizePolicy(QSizePolicy.Expanding ,QSizePolicy.Expanding )
+        self.toolbar2.addWidget(self.widget)
+        
+        self.toolbar2.addAction("  Spaces: 4  ")
+        self.toolbar2.addAction("  UTF-8  ")
         
         self.resize(800,500)
         self.showMaximized()
