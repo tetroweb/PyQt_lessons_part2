@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
-#içine eklene widgetlara tekrardan boyutlandırma yapar
+#Resizing widgets inserted into
 class main(QWidget):
     def __init__(self):
         super().__init__()
