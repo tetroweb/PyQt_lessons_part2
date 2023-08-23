@@ -4,7 +4,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 
-#Pencereyi etkileyecek event yazmak istiyorsak yeni bir fonksiyon yazmamız gerekir.
+#If we want to write an event that will affect the window, we need to write a new function.
 class main(QWidget):
     def __init__(self):
         super().__init__()
