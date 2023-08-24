@@ -1,4 +1,4 @@
-from PyQt5 import QtGui
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -14,7 +14,7 @@ class main(QWidget):
         
         # self.label.setTextInteractionFlags(Qt.TextEditable | Qt.TextSelectableByKeyboard | Qt.TextSelectableByMouse | Qt.LinksAccessibleByMouse | Qt.LinksAccessibleByKeyboard )
         self.label.setTextInteractionFlags(Qt.TextEditorInteraction | Qt.TextBrowserInteraction)# 3 in 1
-        # self.label.setOpenExternalLinks(True)
+        self.label.setOpenExternalLinks(True)
         
         self.resize(800,500)
         self.show()
