@@ -27,7 +27,7 @@ class main(QWidget):
         self.text.setCurrentFont(f)
     
     def color_changed(self,t):
-        self.text.setTextColor(QColor("%s"%t))
+        self.text.setTextColor(QColor(t))
      
 app = QApplication([])
 window = main()
