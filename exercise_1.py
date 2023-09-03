@@ -64,13 +64,15 @@ class main(QMainWindow):
         self.title = QLabel("Title of this window")
         self.title.setStyleSheet("color : rgb(191,191,191)")
         
+        self.hbox.addWidget(self.title)
+        
         self.hbox2 = QHBoxLayout()
         self.hbox.addLayout(self.hbox2)
         
         self.hbox3 = QHBoxLayout()
         self.hbox.addLayout(self.hbox3)
         
-        self.hbox2.addWidget(self.title)
+        
         
         self.tbutton1 = QToolButton()
         self.tbutton2 = QToolButton()
@@ -88,6 +90,10 @@ class main(QMainWindow):
         self.tbutton2.setFixedHeight(self.menubar.sizeHint().height())
         self.tbutton3.setFixedHeight(self.menubar.sizeHint().height())
         
+        self.tbutton1.clicked.connect(self.showMinimized)
+        self.tbutton2.clicked.connect(self.showMaxNormal)
+        self.tbutton3.clicked.connect(self.close)
+        
         
         self.hbox3.addWidget(self.tbutton1)
         self.hbox3.addWidget(self.tbutton2)
@@ -96,6 +102,8 @@ class main(QMainWindow):
         self.hbox3.setAlignment(Qt.AlignRight)
         self.hbox2.setContentsMargins(self.menubar.sizeHint().width(),0,0,0)
         self.hbox2.setAlignment(Qt.AlignCenter)
+        
+        
         
         self.toolbar = QToolBar()
         self.addToolBar(Qt.LeftToolBarArea , self.toolbar)
@@ -138,6 +146,13 @@ class main(QMainWindow):
         self.toolbar2.addAction("  Python  ")
         self.toolbar2.addAction("  Error 0  ")
         
+        self.widget_size = QWidget()
+        self.widget_size.setFixedSize(20,20)
+        self.toolbar2.addWidget(self.widget_size)
+        self.grip = QSizeGrip(self.widget_size)
+        self.grip.move(10,7)
+        
+        
         self.widget = QWidget()
         self.widget.setSizePolicy(QSizePolicy.Expanding ,QSizePolicy.Expanding )
         self.toolbar2.addWidget(self.widget)
@@ -146,7 +161,42 @@ class main(QMainWindow):
         self.toolbar2.addAction("  UTF-8  ")
         
         self.resize(800,500)
-        self.showMaximized()
+        self.show()
+        self.title.mousePressEvent = self.first
+        self.title.mouseMoveEvent = self.last
+        self.title.mouseReleaseEvent = self.reset
+        
+        self.title.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.title.customContextMenuRequested.connect(self.menu_open)
+        
+    def menu_open(self,p):
+        menu = QMenu()
+        action1 = menu.addAction("Minimize")
+        action2 =menu.addAction("Maximize")
+        action3 = menu.addAction("Close")
+        
+        action1.triggered.connect(self.showMinimized)
+        action2.triggered.connect(self.showMaximized)
+        action3.triggered.connect(self.close)
+        menu.exec(self.title.mapToGlobal((p)))
+    def showMaxNormal(self):
+        if self.isMaximized():
+            self.showNormal()
+        else:
+            self.showMaximized()
+    def first(self,e):
+        if e.button() == Qt.LeftButton:
+            self.control = True
+            self.mouse_pos = self.mapToGlobal(e.pos())
+            self.window_pos = self.pos()
+    def last(self,e):
+            if self.control == True:
+                change_pos = self.mapToGlobal(e.pos())-self.mouse_pos
+                self.move(self.window_pos+change_pos)
+            
+    def reset(self,e):
+            self.control = False
+        
         
 app = QApplication([])
 window = main()
