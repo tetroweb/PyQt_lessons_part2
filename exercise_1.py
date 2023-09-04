@@ -64,11 +64,12 @@ class main(QMainWindow):
         self.title = QLabel("Title of this window")
         self.title.setStyleSheet("color : rgb(191,191,191)")
         
-        self.hbox.addWidget(self.title)
+        
         
         self.hbox2 = QHBoxLayout()
         self.hbox.addLayout(self.hbox2)
         
+        self.hbox2.addWidget(self.title)
         self.hbox3 = QHBoxLayout()
         self.hbox.addLayout(self.hbox3)
         
@@ -99,10 +100,12 @@ class main(QMainWindow):
         self.hbox3.addWidget(self.tbutton2)
         self.hbox3.addWidget(self.tbutton3)
 
-        self.hbox3.setAlignment(Qt.AlignRight)
-        self.hbox2.setContentsMargins(self.menubar.sizeHint().width(),0,0,0)
-        self.hbox2.setAlignment(Qt.AlignCenter)
+        spacer_label = QLabel()
+        spacer_label.setFixedWidth(20)
         
+        self.hbox.setContentsMargins(self.menubar.sizeHint().width(),0,0,0)
+        self.hbox.setAlignment(Qt.AlignCenter)
+        self.hbox3.setAlignment(Qt.AlignRight)
         
         
         self.toolbar = QToolBar()
